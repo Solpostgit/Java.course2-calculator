@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FirstController {
-    @GetMapping
+    @GetMapping("/calculator")
     public String greetingsUser() {
         return "Добро пожаловать в калькулятор";
     }
