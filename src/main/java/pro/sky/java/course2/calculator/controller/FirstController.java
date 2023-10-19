@@ -12,9 +12,11 @@ import java.util.stream.Stream;
 @RequestMapping("/calculator")
 public class FirstController {
     private final CalcService calcService;
+
     public FirstController(CalcService calcService) {
         this.calcService = calcService;
     }
+
     //private int num1;
     //private int num2;
     @GetMapping //метод 1 выполнен
@@ -22,17 +24,34 @@ public class FirstController {
         return "Добро пожаловать в калькулятор";
     }
 
-    @GetMapping("/plus?num1=5&num2=5")
-    public String plusCalc(int num1, int num2) { //метод 2 "сложение"
-        //return num1 + num2; //не работает
-        return "5 + 5 = " + calcService.getSumCalc(); //выдает ошибку 404
-        // This application has no explicit mapping for /error, so you are seeing this as a fallback.
-        //
-        //Thu Oct 19 00:17:35 MSK 2023
-        //There was an unexpected error (type=Not Found, status=404).
+    @GetMapping("/plus")
+    public String plusCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 2 "сложение"
+        return "5 + 5 = " + calcService.getOperationCalc();
+        //Указываем в браузере http://localhost:8080/calculator/plus?num1=5&num2=5
     }
 
-    @GetMapping("/greetings") //проверка метода, что он работает http://localhost:8080/calculator/greetings?name=John&lastName=Connor
+    @GetMapping("/minus")
+    public String minusCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 2 "вычитание"
+        return "5 - 5 = " + calcService.getMinusCalc();
+        //Указываем в браузере http://localhost:8080/calculator/minus?num1=5&num2=5
+    }
+
+    @GetMapping("/multiply")
+    public String multiplyCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 3 "умножение"
+
+        return "5 * 5 = " + calcService.getMultiplyCalc();
+        //Указываем в браузере http://localhost:8080/calculator/multiply?num1=5&num2=5
+    }
+
+    @GetMapping("/divide")
+    public String divideCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 4 "деление"
+
+        return "5 * 5 = " + calcService.getDivideCalc();
+        //Указываем в браузере http://localhost:8080/calculator/divide?num1=5&num2=5
+    }
+
+    @GetMapping("/greetings")
+    //проверка метода, что он работает http://localhost:8080/calculator/greetings?name=John&lastName=Connor
     public String showGreetings(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName) {
         return "Hello,  " + lastName + " " + name + "!";
     }
