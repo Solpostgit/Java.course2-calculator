@@ -28,7 +28,7 @@ public class FirstController {
         if (num1 == null || num2 == null) {
             return "Оба аргумента обязательны! Попробуй ещё раз.";
         }
-        return calculatorServiceImpl.plus(num1, num2);
+        return num1 + " + " + num2 + " = " + calculatorServiceImpl.plus(num1, num2);
         //Указываем в браузере http://localhost:8080/calculator/plus?num1=25&num2=5
     }
 
@@ -40,7 +40,7 @@ public class FirstController {
         if (num1 == null || num2 == null) {
             return "Оба аргумента обязательны! Попробуй ещё раз.";
         }
-        return calculatorServiceImpl.minus(num1, num2);
+        return num1 + " - " + num2 + " = " + calculatorServiceImpl.minus(num1, num2);
         //Указываем в браузере http://localhost:8080/calculator/minus?num1=25&num2=5
     }
 
@@ -52,7 +52,7 @@ public class FirstController {
         if (num1 == null || num2 == null) {
             return "Оба аргумента обязательны! Попробуй ещё раз.";
         }
-        return calculatorServiceImpl.multiply(num1, num2);
+        return num1 + " * " + num2 + " = " + calculatorServiceImpl.multiply(num1, num2);
         //Указываем в браузере http://localhost:8080/calculator/multiply?num1=5&num2=5
     }
 
@@ -67,7 +67,7 @@ public class FirstController {
         if (num2.equals(0)) {
             return "Деление на ноль запрещено!";
         }
-        return calculatorServiceImpl.divide(num1, num2);
+        return num1 + " / " + num2 + " = " + calculatorServiceImpl.divide(num1, num2);
         //Указываем в браузере http://localhost:8080/calculator/divide?num1=25&num2=5
     }
 }
