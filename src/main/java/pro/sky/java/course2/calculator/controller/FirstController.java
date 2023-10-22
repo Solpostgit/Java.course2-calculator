@@ -6,53 +6,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.calculator.service.CalcService;
 
-import java.util.stream.Stream;
-
 @RestController
 @RequestMapping("/calculator")
 public class FirstController {
-    private final CalcService calcService;
+    private final CalcService calculatorServiceImpl;
 
-    public FirstController(CalcService calcService) {
-        this.calcService = calcService;
+    public FirstController(CalcService calculatorServiceImpl) {
+        this.calculatorServiceImpl = calculatorServiceImpl;
     }
 
-    //private int num1;
-    //private int num2;
     @GetMapping //метод 1 выполнен
     public String greetingsUser() {
         return "Добро пожаловать в калькулятор";
     }
 
     @GetMapping("/plus")
-    public String plusCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 2 "сложение"
-        return "5 + 5 = " + calcService.getOperationCalc();
-        //Указываем в браузере http://localhost:8080/calculator/plus?num1=5&num2=5
+    public String plus(
+            @RequestParam(name = "num1", required = false) Integer num1,
+            @RequestParam(name = "num2", required = false) Integer num2
+    ) {
+        if (num1 == null || num2 == null) {
+            return "Оба аргумента обязательны! Попробуй ещё раз.";
+        }
+        return calculatorServiceImpl.plus(num1, num2);
+        //Указываем в браузере http://localhost:8080/calculator/plus?num1=25&num2=5
     }
 
     @GetMapping("/minus")
-    public String minusCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 2 "вычитание"
-        return "5 - 5 = " + calcService.getMinusCalc();
-        //Указываем в браузере http://localhost:8080/calculator/minus?num1=5&num2=5
+    public String minus(
+            @RequestParam(name = "num1", required = false) Integer num1,
+            @RequestParam(name = "num2", required = false) Integer num2
+    ) {
+        if (num1 == null || num2 == null) {
+            return "Оба аргумента обязательны! Попробуй ещё раз.";
+        }
+        return calculatorServiceImpl.minus(num1, num2);
+        //Указываем в браузере http://localhost:8080/calculator/minus?num1=25&num2=5
     }
 
     @GetMapping("/multiply")
-    public String multiplyCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 3 "умножение"
-
-        return "5 * 5 = " + calcService.getMultiplyCalc();
+    public String multiply(
+            @RequestParam(name = "num1", required = false) Integer num1,
+            @RequestParam(name = "num2", required = false) Integer num2
+    ) {
+        if (num1 == null || num2 == null) {
+            return "Оба аргумента обязательны! Попробуй ещё раз.";
+        }
+        return calculatorServiceImpl.multiply(num1, num2);
         //Указываем в браузере http://localhost:8080/calculator/multiply?num1=5&num2=5
     }
 
     @GetMapping("/divide")
-    public String divideCalc(@RequestParam("num1") int num1, @RequestParam("num2") int num2) { //метод 4 "деление"
-
-        return "5 * 5 = " + calcService.getDivideCalc();
-        //Указываем в браузере http://localhost:8080/calculator/divide?num1=5&num2=5
-    }
-
-    @GetMapping("/greetings")
-    //проверка метода, что он работает http://localhost:8080/calculator/greetings?name=John&lastName=Connor
-    public String showGreetings(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName) {
-        return "Hello,  " + lastName + " " + name + "!";
+    public String divide(
+            @RequestParam(name = "num1", required = false) Integer num1,
+            @RequestParam(name = "num2", required = false) Integer num2
+    ) {
+        if (num1 == null || num2 == null) {
+            return "Оба аргумента обязательны! Попробуй ещё раз.";
+        }
+        if (num2.equals(0)) {
+            return "Деление на ноль запрещено!";
+        }
+        return calculatorServiceImpl.divide(num1, num2);
+        //Указываем в браузере http://localhost:8080/calculator/divide?num1=25&num2=5
     }
 }

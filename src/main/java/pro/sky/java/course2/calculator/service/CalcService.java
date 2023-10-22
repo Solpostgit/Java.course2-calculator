@@ -1,8 +1,8 @@
 package pro.sky.java.course2.calculator.service;
 
 public interface CalcService {
-    int getOperationCalc();
-    int getMinusCalc();
-    int getMultiplyCalc();
-    int getDivideCalc();
+    String plus(int num1, int num2);
+    String minus(int num1, int num2);
+    String multiply(int num1, int num2);
+    String divide(int num1, int num2);
 }
